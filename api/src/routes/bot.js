@@ -10,9 +10,8 @@ botRouter
       .catch(err => next(err))
   })
   .post('/', async (req, res, next) => {
-    const bot = new Bot(req.body)
-
     try {
+      const bot = new Bot(req.body)
       const errors = await bot.validate()
       if (errors.length !== 0) return res.json(errors);
 

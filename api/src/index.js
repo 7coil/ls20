@@ -1,6 +1,6 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 import { botRouter } from './routes/bot';
-import bodyParser from 'body-parser';
 
 const app = express();
 

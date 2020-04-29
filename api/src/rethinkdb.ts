@@ -10,7 +10,4 @@ r.connect({
   dbCon = connection;
 })
 
-export {
-  r,
-  dbCon
-}
+export { r, dbCon };
