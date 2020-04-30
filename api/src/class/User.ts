@@ -53,7 +53,7 @@ class User implements UserObject {
           })
           .run(dbCon)
 
-        resolve;
+        resolve();
       } catch(e) {
         reject(e);
       }
