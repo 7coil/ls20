@@ -1,5 +1,6 @@
 import express from 'express';
 import { Bot } from '../class/Bot';
+import { User } from '../class/User';
 
 const botRouter = express.Router();
 
@@ -9,7 +10,7 @@ botRouter
       .then(bots => res.json(bots))
       .catch(err => next(err))
   })
-  .post('/', async (req, res, next) => {
+  .post('/', User.requireUserMiddleware, async (req, res, next) => {
     try {
       const bot = new Bot(req.body)
       const errors = await bot.validate()

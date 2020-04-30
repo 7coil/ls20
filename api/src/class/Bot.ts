@@ -1,4 +1,5 @@
 import { ArrayMinSize, IsEnum, IsInt, IsUrl, Length, MaxLength, validate, ValidateNested, ValidationError } from 'class-validator';
+import { BotState } from '../enum/BotState';
 import { Language } from "../enum/Language";
 import { dbCon, r } from '../rethinkdb';
 import { DiscordPermissions } from "./Permissions";
@@ -15,6 +16,8 @@ interface BotObject {
   count: number;
   website: string;
   permissions: number;
+  botState: BotState;
+  owners: string[];
   translations: BotTranslationObject[];
 }
 
@@ -74,17 +77,26 @@ class Bot {
   @ValidateNested()
   translations: BotTranslation[];
 
+  @IsEnum(BotState)
+  botState: BotState;
+
+  owners: string[];
+
   constructor({
     id,
     count,
     website,
     permissions,
     translations,
+    botState,
+    owners,
   }: BotObject) {
     this.id = id;
     this.count = count;
     this.website = website;
     this.permissions = DiscordPermissions.fromInteger(permissions);
+    this.botState = botState;
+    this.owners = owners;
 
     if (Array.isArray(translations)) {
       this.translations = translations.map(translation => new BotTranslation(translation));
@@ -100,6 +112,8 @@ class Bot {
       website: this.website,
       permissions: this.permissions.toInteger(),
       translations: this.translations.map(translation => translation.toObject()),
+      botState: this.botState,
+      owners: this.owners,
     }
   }
 
