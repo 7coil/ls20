@@ -47,7 +47,7 @@ class User implements UserObject {
   write(): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        await r.table('bots')
+        await r.table('users')
           .insert(this.toObject(), {
             conflict: 'replace'
           })
@@ -85,7 +85,7 @@ class User implements UserObject {
   }
 
   static fetchFromID(id: string): Promise<User> {
-    return r.table('bots')
+    return r.table('users')
       .get(id)
       .run(dbCon)
       .then((data: UserObject) => {
