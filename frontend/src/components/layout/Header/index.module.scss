@@ -1,0 +1,15 @@
+@use 'config';
+
+.primaryHeader {
+  background-color: config.$primary-background;
+  border-bottom: config.$component-border;
+}
+
+.secondaryHeader {
+  border-bottom: config.$component-border;
+  background-color: config.$secondary-background;
+}
+
+.siteName {
+  font-weight: bold;
+}

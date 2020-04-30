@@ -1,0 +1,11 @@
+@use 'config';
+
+.primaryFooter {
+  background-color: config.$primary-background;
+  border-top: config.$component-border;
+}
+
+.secondaryFooter {
+  border-top: config.$component-border;
+  background-color: config.$secondary-background;
+}

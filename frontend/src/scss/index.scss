@@ -1,0 +1,7 @@
+@use 'config';
+
+body {
+  margin: 0;
+  background-color: config.$secondary-background;
+  // box-sizing: border-box;
+}

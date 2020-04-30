@@ -10,5 +10,8 @@ Starting anew with a better codebase.
     - Supports many languages
     - (English only until all features finalised)
 
+## Developing
+Docker is currently not functioning at this time.
+
 ## Support
 For free community support, try [my Discord server](https://discordapp.com/invite/wHgdmf4).

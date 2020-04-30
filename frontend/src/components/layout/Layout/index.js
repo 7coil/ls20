@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
+import { Footer } from '../Footer';
+import { Header } from '../Header';
+import styles from './index.module.scss';
 
 class Layout extends Component {
   render() {
     return (
-      <div>
-        <header>
-          <h1>Header</h1>
-        </header>
-        <main>
-          <h1>Main Content</h1>
+      <div className={styles.container}>
+        <Header />
+        <main className={styles.main}>
+          {this.props.children}
         </main>
-        <footer>
-          <hr />
-          <p>Footer</p>
-        </footer>
+        <Footer />
       </div>
     )
   }
