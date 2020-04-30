@@ -8,13 +8,15 @@ const tables = [
   'users'
 ]
 
-r.connect({
-  host: databaseHost,
-  db: dbName
-}, (error, connection) => {
+const onConnect = (error, connection) => {
   if (error) {
     console.log(error);
-    connection.close();
+    setTimeout(() => {
+      r.connect({
+        host: databaseHost,
+        db: dbName
+      }, onConnect)
+    }, 100)
   } else {
     r.dbList().run(connection)
       .then((dbList) => {
@@ -42,4 +44,9 @@ r.connect({
         connection.close();
       })
   }
-})
+}
+
+r.connect({
+  host: databaseHost,
+  db: dbName
+}, onConnect)
