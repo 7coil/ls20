@@ -3,12 +3,13 @@ import { User } from '../class/User';
 import fetch from 'node-fetch';
 import { discordApplicationSecret } from '../class/DiscordApplicationSecret';
 import { createSearchParams } from '../functions/makeFormData';
+import { Links } from '../enum/Links';
 
 const authRouter = express.Router();
 
 authRouter
   .get('/', (req, res, next) => {
-    res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${discordApplicationSecret.id}&redirect_uri=http://127.0.0.1:1234/auth/redirect&response_type=code&scope=identify`)
+    res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${discordApplicationSecret.id}&redirect_uri=${Links.redirect}&response_type=code&scope=identify`)
   })
   .get('/redirect', async (req, res, next) => {
     const code = req.query?.code;
@@ -27,7 +28,7 @@ authRouter
           client_secret: discordApplicationSecret.clientSecret,
           grant_type: 'authorization_code',
           code,
-          redirect_uri: 'http://127.0.0.1:1234/auth/redirect',
+          redirect_uri: Links.redirect,
           scope: 'identify',
         })
       })
