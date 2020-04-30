@@ -1,3 +1,7 @@
 site:
   name: 'Discord Apps'
   copyright: 'This website is licenced for use under the MIT licence.'
+
+buttons:
+  github_repository: GitHub
+  discord_server: Discord Server
