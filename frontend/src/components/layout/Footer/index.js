@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import styles from './index.module.scss';
-import { MaxWidthContainer } from '../MaxWidthContainer';
 import { FormattedMessage } from 'react-intl';
-import links from '../../../data/links.yml'
+import { Links } from '../../../enum/Links';
+import { MaxWidthContainer } from '../MaxWidthContainer';
+import styles from './index.module.scss';
 
 class Footer extends Component {
   render() {
@@ -11,8 +11,8 @@ class Footer extends Component {
         <div className={styles.primaryFooter}>
           <MaxWidthContainer>
             <ul>
-              <li><a href={links.github_repository}><FormattedMessage id="buttons.github_repository" /></a></li>
-              <li><a href={links.discord_server}><FormattedMessage id="buttons.discord_server" /></a></li>
+              <li><a href={Links.githubRepository}><FormattedMessage id="buttons.github_repository" /></a></li>
+              <li><a href={Links.discordServer}><FormattedMessage id="buttons.discord_server" /></a></li>
             </ul>
           </MaxWidthContainer>
         </div>
@@ -27,3 +27,4 @@ class Footer extends Component {
 }
 
 export { Footer };
+

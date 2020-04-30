@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.3'
 
 services:
   rethinkdb:
@@ -11,8 +11,17 @@ services:
       - 8000:8000
     environment:
       DATABASE_HOST: rethinkdb
+      DOCKER: 'true'
+    secrets:
+      - discord_application
+  frontend:
+    build: ./frontend
+    ports:
+      - 8001:8001
+  rethinkdb_setup:
+    build: ./rethinkdb_setup
+    environment:
+      DATABASE_HOST: rethinkdb
 secrets:
   discord_application:
     file: ./secrets/discord_application.json
-environment:
-  DOCKER: true
