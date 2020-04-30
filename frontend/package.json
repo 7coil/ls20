@@ -20,8 +20,9 @@
   },
   "scripts": {
     "start": "parcel src/index.html",
+    "watch:server": "parcel watch src/server.js --target=node",
     "build:client": "parcel build src/index.html",
-    "build:server": "parcel build src/server.js --target=node --no-minify"
+    "build:server": "parcel build src/server.js --target=node"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

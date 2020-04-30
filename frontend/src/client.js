@@ -7,9 +7,9 @@ import { ReduxProvider } from './components/functional/ReduxProvider';
 const div = document.getElementById('app');
 
 ReactDOM.render(
-<ReduxProvider>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-</ReduxProvider>  
-, div)
+  <ReduxProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ReduxProvider>
+  , div)

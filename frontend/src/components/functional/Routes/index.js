@@ -6,7 +6,7 @@ import InternationalisationProvider from '../InternationalisationProvider';
 
 class Routes extends Component {
   render() {
-    if (window?.location.hostname === 'localhost') window.location.href = `http://127.0.0.1:1234${window.location.pathname}`;
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') window.location.href = `http://127.0.0.1:1234${window.location.pathname}`;
 
     return (
       <Switch>
