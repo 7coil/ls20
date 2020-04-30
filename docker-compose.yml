@@ -3,13 +3,16 @@ version: '3.1'
 services:
   rethinkdb:
     image: rethinkdb
+    ports:
+      - 127.0.0.1:9000:8080
   api:
     build: ./api
     ports:
       - 8080:8080
     environment:
       DATABASE_HOST: rethinkdb
-      DOCKER: true
 secrets:
   discord_application:
     file: ./secrets/discord_application.json
+environment:
+  DOCKER: true
