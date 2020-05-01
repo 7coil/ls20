@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { getApiServer } from '../../enum/Links'
 
 export const REQUEST_AUTH = 'REQUEST_AUTH';
 export const RECEIVE_AUTH = 'RECEIVE_AUTH';
@@ -18,18 +19,33 @@ const receiveAuth = (data) => {
 
 const fetchAuth = () => {
   return (dispatch) => {
+    let token;
+
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('token')) {
+        token = urlParams.get('token');
+        urlParams.delete('token');
+        window.localStorage.setItem('token', token);
+        window.location.search = `?${urlParams.toString()}`
+      } else {
+        token = window.localStorage.getItem('token');
+      }
+    }
+
     dispatch(requestAuth());
-    return fetch('http://127.0.0.1:1234/auth/me', {
+    return fetch(`${getApiServer()}/auth/me`, {
       headers: {
-        'Authorization': window.localStorage.getItem('token')
+        'Authorization': token
       }
     })
+      .then(res => res.json())
+      .then(json => dispatch(receiveAuth(json)))
   }
 }
 
 const canFetchAuth = () => {
   if (typeof window === 'undefined') return false
-  if (!window?.localStorage?.getItem('token')) return false
   return true;
 }
 

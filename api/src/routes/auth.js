@@ -9,6 +9,7 @@ const authRouter = express.Router();
 
 authRouter
   .get('/', (req, res, next) => {
+    if (req.query.return) res.cookie('return', req.query.return)
     res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${discordApplicationSecret.id}&redirect_uri=${Links.redirect}&response_type=code&scope=identify`)
   })
   .get('/redirect', async (req, res, next) => {
@@ -62,7 +63,12 @@ authRouter
 
     user.write()
       .then(() => {
-        res.send(user.generateToken());
+        let link = req.cookies.return || 'http://127.0.0.1:1234';
+
+        link += link.includes('?') ? '&' : '?'
+        link += `token=${user.generateToken()}`
+
+        res.redirect(link)
       })
       .catch((err) => {
         next(err);

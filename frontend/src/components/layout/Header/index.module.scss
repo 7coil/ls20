@@ -10,6 +10,19 @@
   background-color: config.$secondary-background;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
 .siteName {
   font-weight: bold;
+}
+
+.links {
+  list-style: none;
+  display: inline-flex;
+  gap: 1em;
+  margin: 0;
+  padding: 0;
 }
