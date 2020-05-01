@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { dbCon, r } from '../rethinkdb';
+import { administrators } from '../data/administrators';
 
 const SECRET = '// TODO: Replace Secret';
 
@@ -28,6 +29,10 @@ class User implements UserObject {
     this.id = id
     this.username = username
     this.discriminator = discriminator
+  }
+
+  isAdministrator(): boolean {
+    return administrators.includes(this.id);
   }
 
   generateToken(): string {

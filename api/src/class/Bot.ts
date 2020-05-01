@@ -1,8 +1,9 @@
-import { ArrayMinSize, IsEnum, IsInt, IsUrl, Length, MaxLength, validate, ValidateNested, ValidationError } from 'class-validator';
+import { ArrayMinSize, IsEnum, IsInt, IsUrl, Length, MaxLength, validate, ValidateNested, ValidationError, IsString, IsArray } from 'class-validator';
 import { BotState } from '../enum/BotState';
 import { Language } from "../enum/Language";
 import { dbCon, r } from '../rethinkdb';
 import { DiscordPermissions } from "./Permissions";
+import { User } from './User';
 
 interface BotTranslationObject {
   name: string;
@@ -80,6 +81,10 @@ class Bot {
   @IsEnum(BotState)
   botState: BotState;
 
+  @MaxLength(20, {
+    each: true
+  })
+  @IsArray()
   owners: string[];
 
   constructor({
@@ -115,6 +120,14 @@ class Bot {
       botState: this.botState,
       owners: this.owners,
     }
+  }
+
+  userCanEditBot(user: User): boolean;
+  userCanEditBot(user: string): boolean;
+  userCanEditBot(user: any): boolean {
+    if (user instanceof User) return this.owners.includes(user.id) || user.isAdministrator()
+    if (typeof user === 'string') return this.owners.includes(user);
+    return false;
   }
 
   static fetchAll(): Promise<Bot[]> {
