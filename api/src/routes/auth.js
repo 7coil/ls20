@@ -64,11 +64,7 @@ authRouter
     user.write()
       .then(() => {
         let link = req.cookies.return || 'http://127.0.0.1:1234';
-
-        link += link.includes('?') ? '&' : '?'
-        link += `token=${user.generateToken()}`
-
-        res.redirect(link)
+        res.redirect(`${link}?token=${user.generateToken()}`)
       })
       .catch((err) => {
         next(err);

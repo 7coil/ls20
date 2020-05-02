@@ -19,19 +19,7 @@ const receiveAuth = (data) => {
 
 const fetchAuth = () => {
   return (dispatch) => {
-    let token;
-
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('token')) {
-        token = urlParams.get('token');
-        urlParams.delete('token');
-        window.localStorage.setItem('token', token);
-        window.location.search = `?${urlParams.toString()}`
-      } else {
-        token = window.localStorage.getItem('token');
-      }
-    }
+    const token = window.localStorage.getItem('token');
 
     dispatch(requestAuth());
     return fetch(`${getApiServer()}/auth/me`, {

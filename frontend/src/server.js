@@ -15,7 +15,8 @@ const htmlDocument = fs.readFileSync(path.join(__dirname, 'index.html'), { encod
 const app = express();
 
 app
-  .use('*', async (req, res, next) => {
+  .use(express.static(path.join(__dirname, 'dist')))
+  .use(async (req, res, next) => {
     for (const redirect of redirects) {
       const match = matchPath(req.baseUrl, redirect);
       if (match) return res.redirect(redirect.status, redirect.to({ match }))
