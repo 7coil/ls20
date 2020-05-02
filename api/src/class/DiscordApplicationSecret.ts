@@ -26,8 +26,6 @@ class DiscordApplicationSecret implements DiscordApplicationSecretObject {
 
 const discordApplicationSecret = new DiscordApplicationSecret();
 
-console.log(discordApplicationSecret);
-
 export {
   DiscordApplicationSecret,
   discordApplicationSecret
